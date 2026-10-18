@@ -1,6 +1,56 @@
 import numpy as np
 
+def primer_no_nulo(b):
+    '''
+    funcion que busca el primer valor no nulo de un vector, contando desde 0.
+    Devuelve el indice donde se encuentra
+    '''
+    indices = np.flatnonzero(b)
+    if indices.size == 0:
+        return len(b)
+    return indices[0]
+
+def ultimo_no_nulo(b):
+    '''
+    funcion que busca el ultimo valor no nulo de un vector, contando desde 0.
+    Devuelve el indice donde se encuentra
+    '''
+    indices = np.flatnonzero(b)
+    if indices_size == 0:
+        return -1
+    return indices[-1]
+
+def sol_trinfcol(A, b):
+    '''
+    Resuelve sistema lineal Ax = b.
+    Para matrices triangulares inferiores.
+    Enfoque por columnas, vectorizado, evitando 0's
+    '''
+    n = len(b)
+    primer_indice = primer_no_nulo(b)
+    x = np.array(b, dtype=float)
+    for j in range(primer_indice, n):
+        x[j] /= A[j, j]
+        x[j+1:] -= A[j+1:, j] * x[j]
+    return x
+
+def sol_trsupcol(A, b):
+    '''
+    Resuelve sistema lineal Ax = b.
+    Para matrices triangulares superiores.
+    Enfoque por columnas, vectorizado, evitando 0's
+    '''
+    n = ultimo_no_nulo(b)
+    x = np.array(b, dtype=float)
+    for j in range(n, -1, -1):
+        x[j] /= A[j, j]
+        x[:j] -= A[:j, j] * x[j]
+    return x
+
 def ref_householder(x):
+    '''
+    Realiza la reflexion de householder sobre el vector x.
+    '''
     m = len(x)
     u = x.copy()
     sigma = np.sum(x[1:] ** 2)
@@ -22,6 +72,9 @@ def ref_householder(x):
 
 def qrhouseholderp(A):
     '''
+    Realiza descomposicion QR de A con reflexiones de householder.
+    Realiza permutaciones de columnas
+    Devuelve Q, R y P, en ese orden.
     CUIDADO: Este algoritmo puede devolver valores negativos 
     en la diagonal de R
     '''
