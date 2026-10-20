@@ -16,7 +16,7 @@ def ultimo_no_nulo(b):
     Devuelve el indice donde se encuentra
     '''
     indices = np.flatnonzero(b)
-    if indices_size == 0:
+    if indices.size == 0:
         return -1
     return indices[-1]
 

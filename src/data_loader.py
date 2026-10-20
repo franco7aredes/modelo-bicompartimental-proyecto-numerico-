@@ -27,7 +27,7 @@ def get_indometh_data(subject_id: Optional[int] = None)
         t = df_filtered['time'].to_numpy(dtype=np.float64)
         y = df_filtered['conc'].to_numpy(dtype=np.float64)
     else:
-        df_avg = df:groupby('time')['conc'].mean().reset_index()
+        df_avg = df.groupby('time')['conc'].mean().reset_index()
         t = df_avg['time'].to_numpy(dtype=np.float64)
         y = df_avg['conc'].to_numpy(dtype=np.float64)
 

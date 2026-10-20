@@ -39,7 +39,7 @@ def estimate_initial_guess(t: np.ndarray, y:np.ndarray) -> np.ndarray:
     t_late = t[late_mask]
     y_late = y[late_mask]
 
-    poly_beta = np.polyfit(t_late, np.log(y_kate), 1)
+    poly_beta = np.polyfit(t_late, np.log(y_late), 1)
     beta_init = -poly_beta[0]
     B_init = np.exp(poly_beta[1])
 
@@ -65,6 +65,6 @@ def estimate_initial_guess(t: np.ndarray, y:np.ndarray) -> np.ndarray:
     if alpha_init <= beta_init:
         alpha_init = beta_init * 5.0
 
-    return np.array([A_init, alpha_init, B_init, beta_init], dtype=float64)
+    return np.array([A_init, alpha_init, B_init, beta_init], dtype=np.float64)
 
 
