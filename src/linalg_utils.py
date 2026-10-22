@@ -102,3 +102,24 @@ def qrhouseholderp(A):
         c[j:] -= R[j, j:] * R[j, j:]
 
     return Q, R, P
+
+def sol_cuadmin(A, b):
+    '''
+    resuelve el problema de cuadrados minimos
+    usando QR (Householder con perm)
+    '''
+    Q, R, P = qrhouseholderp(A)
+    m, n = A.shape
+    p = n
+    for i in range(n-1, -1, -1):
+        if abs(R[i, i] < 1e-12:
+            p-= 1
+        else:
+            break
+    R1 = R[:p, :p]
+    b1 = Q.T @ b
+    b1 = b1[:p]
+    y = np.zeros(n)
+    y[:p] = sol_trsupcol(R1, b1)
+    x = P @ y
+    return x
