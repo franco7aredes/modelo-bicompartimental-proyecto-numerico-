@@ -112,7 +112,7 @@ def sol_cuadmin(A, b):
     m, n = A.shape
     p = n
     for i in range(n-1, -1, -1):
-        if abs(R[i, i] < 1e-12:
+        if abs(R[i, i]) < 1e-12:
             p-= 1
         else:
             break

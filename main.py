@@ -1,4 +1,5 @@
 import sys
+from plot_results import plot_fit
 from src.solver import run_indometh_fit
 
 def print_separator(title:str):
@@ -48,6 +49,13 @@ def main():
     print(f"Tasa de retorno (k21): {micro['k21']:.4f} h`-1")
 
     print("\nProceso finalizado con exito./n")
+
+    plot_fit(
+        t=results['t'],
+        y=results['y'],
+        theta=results['theta_opt'],
+        subject_id=str(results['subject_id'])
+        )
 
 if __name__ == "__main__":
     main()

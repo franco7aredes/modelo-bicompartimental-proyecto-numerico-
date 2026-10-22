@@ -1,4 +1,5 @@
 import numpy as np
+from linalg_utils import sol_cuadmin
 
 def evaluate_model(theta: np.ndarray, t:np.ndarray) -> np.ndarray:
     '''
@@ -34,14 +35,19 @@ def compute_jacobian(theta: np.ndarray, t:np.ndarray) -> np.ndarray:
 def estimate_initial_guess(t: np.ndarray, y:np.ndarray) -> np.ndarray:
     '''
     Estima theta_0 = [A, alpha, B, beta] mediante curve stripping
+    utilizando resolucion propia de cuadrados minimos
     '''
     late_mask = t >= 1.25
     t_late = t[late_mask]
     y_late = y[late_mask]
 
-    poly_beta = np.polyfit(t_late, np.log(y_late), 1)
-    beta_init = -poly_beta[0]
-    B_init = np.exp(poly_beta[1])
+    # armar sistema Ax = b para regresion
+    A_late = np.column_stack((t_late, np.ones_like(t_late))
+    b_late = np.log(y_late)
+    x_late = sol_cuadmin(A_late, b_late)
+
+    beta_init = -x_late[0]
+    B_init = np.exp(x_late[1])
 
     if beta_init <= 0:
         beta_init = 0.2
@@ -56,9 +62,12 @@ def estimate_initial_guess(t: np.ndarray, y:np.ndarray) -> np.ndarray:
     valid_res = y_residuals > 0
 
     if np.sum(valid_res) >= 2:
-        poly_alpha = np.polyfit(t_early[valid_res], np.log(y_residuals[valid_res]), 1)
-        alpha_init = -poly_alpha[0]
-        A_init = np.exp(poly_alpha[1])
+        t_early_val = t_early[valid_res]
+        A_early = np.column_stack((t_early_val, np.ones_like(t_early_val)))
+        b_early = np.log(y_residuals[valid_res])
+        x_early = sol_cuadmin(A_early, b_early)
+        alpha_init = -x_early[0]
+        A_init = np.exp(x_early[1])
     else:
         A_init, alpha_init = 2.5, 2.0
 
