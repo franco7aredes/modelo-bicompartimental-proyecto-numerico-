@@ -55,7 +55,7 @@ def run_indometh_fit(
     )
 
     # calculo la calidad del ajuste (suma de cuadrados de residuos y R`2)
-    final_residuals = res_fin(theta_opt)
+    final_residuals = res_fn(theta_opt)
     sse = float(np.sum(final_residuals**2))
     sst = float(np.sum((y - np.mean(y)) ** 2))
     r_squared = float(1.0 - (sse / sst))
