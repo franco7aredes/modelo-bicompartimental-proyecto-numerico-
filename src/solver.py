@@ -1,9 +1,9 @@
 import numpy as np
 from typing import Dict, Any, Optional
 
-from data_loader import get_indometh_data
-from model import compute_residual, compute_jacobian, estimate_initial_guess
-from optimizers import gauss_newton # recordar este nombre
+from src.data_loader import get_indometh_data
+from src.model import compute_residual, compute_jacobian, estimate_initial_guess
+from src.optimizers import gauss_newton
 
 def compute_micro_parameters(theta: np.ndarray) -> Dict[str, float]:
     '''

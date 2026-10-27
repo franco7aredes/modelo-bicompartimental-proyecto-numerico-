@@ -10,8 +10,7 @@ def fetch_raw_indometh() -> pd.Dataframe:
     df = sm.datasets.get_rdataset("Indometh", "datasets").data
     return df
 
-def get_indometh_data(subject_id: Optional[int] = None)
-                    -> Tuple[np.ndarray, np.ndarray]:
+def get_indometh_data(subject_id: Optional[int] = None)-> Tuple[np.ndarray, np.ndarray]:
     '''
     Procesa y formatea los datos de indometacina para ser utilizados por
     el solver

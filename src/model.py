@@ -1,5 +1,5 @@
 import numpy as np
-from linalg_utils import sol_cuadmin
+from src.linalg_utils import sol_cuadmin
 
 def evaluate_model(theta: np.ndarray, t:np.ndarray) -> np.ndarray:
     '''
@@ -9,8 +9,7 @@ def evaluate_model(theta: np.ndarray, t:np.ndarray) -> np.ndarray:
     A, alpha, B, beta = theta
     return A * np.exp(-alpha * t) + B * np.exp(-beta * t)
 
-def compute_residual(theta: np.ndarray, t: np.ndarray, y:np.ndarray)
-                    -> np.ndarray:
+def compute_residual(theta: np.ndarray, t: np.ndarray, y:np.ndarray) -> np.ndarray:
 
     '''
     calcula el vector de residuos r(theta) = C(t; theta) - y
@@ -42,7 +41,7 @@ def estimate_initial_guess(t: np.ndarray, y:np.ndarray) -> np.ndarray:
     y_late = y[late_mask]
 
     # armar sistema Ax = b para regresion
-    A_late = np.column_stack((t_late, np.ones_like(t_late))
+    A_late = np.column_stack((t_late, np.ones_like(t_late)))
     b_late = np.log(y_late)
     x_late = sol_cuadmin(A_late, b_late)
 
