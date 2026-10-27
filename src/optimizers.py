@@ -1,5 +1,5 @@
 import numpy as np
-from linalg_utils import sol_cuadmin
+from src.linalg_utils import sol_cuadmin
 
 def gauss_newton(
     residual_fn,

@@ -11,7 +11,7 @@ def plot_fit(t: np.ndarray, y:np.ndarray, theta: np.ndarray, subject_id: str):
     t_grid = np.linspace(0, max(t) * 1.05, 200)
     y_fit = evaluate_model(theta, t_grid)
 
-    plt.figure(figsuze=(8, 5))
+    plt.figure(figsize=(8, 5))
     plt.scatter(t, y, color='red', label='Datos experimentales', zorder=5)
     plt.plot(t_grid, y_fit, color='blue', label='Ajuste Gauss-Newton', zorder=4)
 

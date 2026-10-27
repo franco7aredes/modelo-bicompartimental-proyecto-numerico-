@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from typing import Tuple, Optional
 
-def fetch_raw_indometh() -> pd.Dataframe:
+def fetch_raw_indometh() -> pd.DataFrame:
     '''
     Descarga e importa el dataset 'Indometh' desde statsmodels
     '''
