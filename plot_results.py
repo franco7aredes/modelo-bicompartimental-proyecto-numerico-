@@ -22,4 +22,7 @@ def plot_fit(t: np.ndarray, y:np.ndarray, theta: np.ndarray, subject_id: str):
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.tight_layout()
+
+    nombre_archivo = f"ajuste_indometacina_sujeto_{subject_id}.png"
+    plt.savefig(nombre_archivo, dpi=300, bbox_inches='tight')
     plt.show()
