@@ -2,31 +2,14 @@ import numpy as np
 from typing import Dict, Any, Optional
 
 from src.data_loader import get_indometh_data
-from src.model import compute_residual, compute_jacobian, estimate_initial_guess
+from src.model import (
+    compute_residual, 
+    compute_jacobian, 
+    estimate_initial_guess,
+    compute_micro_parameters
+    )
 from src.optimizers import gauss_newton
 
-def compute_micro_parameters(theta: np.ndarray) -> Dict[str, float]:
-    '''
-    Traduce los macroparametros theta = [A, alpha, B, beta]
-    a las constantes de velocidad micro-farmacocineticas
-    '''
-    A, alpha, B, beta = theta
-    dose = 25.0 # dosis estandar IV de indometacina en mg
-
-    c0 = A + B
-    v1 = dose / c0 if c0 > 0 else np.nan
-
-    k21 = (A * beta + B * alpha) / c0 if c0 > 0 else np.nan
-    k10 = (alpha * beta) / k21 if k21 > 0 else np.nan
-    k12 = alpha + beta - k10 - k21
-
-    return {
-        'C0': float(c0),
-        'V1': float(v1),
-        'k10': float(k10),
-        'k12': float(k12),
-        'k21': float(k21)
-    }
 
 def run_indometh_fit(
     subject_id: Optional[int] = None,
