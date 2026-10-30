@@ -1,5 +1,5 @@
 import sys
-from plot_results import plot_fit
+from plot_results import plot_fit, plot_convergence
 from src.solver import run_indometh_fit
 
 def print_separator(title:str):
@@ -56,6 +56,8 @@ def main():
         theta=results['theta_opt'],
         subject_id=str(results['subject_id'])
         )
+
+    plot_convergence(results['history'])
 
 if __name__ == "__main__":
     main()
