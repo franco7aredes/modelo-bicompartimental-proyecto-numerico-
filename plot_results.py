@@ -34,7 +34,7 @@ def plot_convergence(history: dict):
 
     iteraciones = range(len(history['iter']))
 
-    errores = history.get('cost', history.get('error',[]))
+    errores = history['norm_r']
 
     plt.figure(figsize=(8, 5))
     plt.plot(iteraciones, errores, marker='o', linestyle='-', color='purple',
