@@ -2,6 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from src.model import evaluate_model
 
+plt.rcParams.update({
+    'font.size': 12,
+    'axes.titlesize': 14,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 11,
+    'ytick.labelsize': 11,
+    'legend.fontsize': 11
+})
+
 def plot_fit(t: np.ndarray, y:np.ndarray, theta: np.ndarray, subject_id: str):
     '''
     grafica los datos experimentales y la curva ajustada
@@ -11,7 +20,7 @@ def plot_fit(t: np.ndarray, y:np.ndarray, theta: np.ndarray, subject_id: str):
     t_grid = np.linspace(0, max(t) * 1.05, 200)
     y_fit = evaluate_model(theta, t_grid)
 
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(6, 4))
     plt.scatter(t, y, color='red', label='Datos experimentales', zorder=5)
     plt.plot(t_grid, y_fit, color='blue', label='Ajuste Gauss-Newton', zorder=4)
 
@@ -36,7 +45,7 @@ def plot_convergence(history: dict):
 
     errores = history['norm_r']
 
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(6, 4))
     plt.plot(iteraciones, errores, marker='o', linestyle='-', color='purple',
         linewidth=2)
 
