@@ -31,3 +31,18 @@ def get_indometh_data(subject_id: Optional[int] = None)-> Tuple[np.ndarray, np.n
         y = df_avg['conc'].to_numpy(dtype=np.float64)
 
     return t, y
+
+
+if __name__ == "__main__":
+    print("--- Dataset original (statsmodels) ---")
+    df_raw = fetch_raw_indometh()
+
+    print(df_raw.head(15))
+
+    print("\nResumen de columnas y tipos de datos:")
+    print(df_raw.info())
+
+    print("\n--- Datos procesados (Promedio poblacional) ---")
+    t, y = get_indometh_data()
+    print(f"Vector de tiempos (t): \n{t}")
+    print(f"Vector de concentraciones (y): \n{y}")

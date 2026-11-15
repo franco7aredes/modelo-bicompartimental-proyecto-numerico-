@@ -99,3 +99,23 @@ def compute_micro_parameters(theta: np.ndarray) -> Dict[str, float]:
         'k12': float(k12),
         'k21': float (k21)
     }
+
+
+# esto es para ver la condicion del jacobiano
+if __name__ == "__main__":
+    from src.data_loader import get_indometh_data
+
+    t, y = get_indometh_data()
+
+    theta0 = estimate_initial_guess(t, y)
+
+    J = compute_jacobian(theta0, t)
+
+    cond_numero = np.linalg.cond(J)
+
+    print("--- Analisis del Jacobiano en la estimacion inicial ---")
+    print(f"Parametros iniciales (theta0): {theta0}")
+    print(f"Numero de condicion kappa(J): {cond_numero:.2f}")
+
+    cond_normales = np.linalg.cond(J.T @ J)
+    print(f"Numero de condicion de las ec. normales kappa(J.T J): {cond_normales:.2f}")
